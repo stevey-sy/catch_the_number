@@ -1,11 +1,11 @@
 import {useState, useEffect} from "react";
-import { enhanceManualRouteObjects } from "react-router/dist/lib/components";
 import CreateQuestion from "../Components/createQuestion";
+import AnswerQuestion from "../Components/answerQuestion";
 import UserList from "../Components/userList";
 
 function PlayGround(props) {
 
-    // o,x
+    // o,x - 완료.
     // 질문입력 - 완료.
     // 유저리스트 - 완료.
     // 결과 컴포넌트
@@ -24,14 +24,20 @@ function PlayGround(props) {
     // effect function
     // 유저 네임 입력 받기;
     if(userList.length === 0) {
-      const obj = new Object();
-      obj.userName = 'user1';
-      addItem(obj);
+      const user = {
+        userName: "user1",
+        isHost: true,
+        answer: "",
+      };
+      addItem(user);
+      props.game.currentQuestioner = "user1";
     }
   }, []);
 
   return (
-    <><CreateQuestion question={props.game.question} />
+    <>{props.game.currentQuestioner == "user1" 
+        ? <CreateQuestion game={props.game} setGame={props.setGame} /> : <AnswerQuestion game={props.game} setGame={props.setGame}/>}
+
     <UserList userList={userList} />
     </>
   );
