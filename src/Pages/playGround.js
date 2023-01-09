@@ -3,7 +3,7 @@ import CreateQuestion from "../Components/createQuestion";
 import AnswerQuestion from "../Components/answerQuestion";
 import UserList from "../Components/userList";
 
-function PlayGround(props) {
+function PlayGround({userList, questionList, currentQuestioner, isTyping}) {
 
     // o,x - 완료.
     // 질문입력 - 완료.
@@ -11,13 +11,14 @@ function PlayGround(props) {
     // 결과 컴포넌트
 
     const onSubmit = (event) => {
-        props.game.question = event.target.value;
+        // props.game.question = event.target.value;
     }
 
-    const [userList, setUserList] = useState(props.game.userList);
+    // const [userList, setUserList] = useState(userList);
 
     const addItem = (newItem) => {
-      setUserList((userList)=>[...userList, newItem]);
+      userList = [...userList, newItem];
+      // setUserList((userList)=>[...userList, newItem]);
     }
 
     useEffect(() => {
@@ -30,13 +31,13 @@ function PlayGround(props) {
         answer: "",
       };
       addItem(user);
-      props.game.currentQuestioner = "user1";
+      currentQuestioner = "user1";
     }
   }, []);
 
   return (
-    <>{props.game.currentQuestioner == "user1" 
-        ? <CreateQuestion game={props.game} setGame={props.setGame} /> : <AnswerQuestion game={props.game} setGame={props.setGame}/>}
+    <>{currentQuestioner == "user1" 
+        ? <CreateQuestion questionList={questionList} /> : <AnswerQuestion isTyping={isTyping} questionList={questionList} />}
 
     <UserList userList={userList} />
     </>

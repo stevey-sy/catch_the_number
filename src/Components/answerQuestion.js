@@ -1,16 +1,16 @@
 import {useState, useEffect} from "react";
 
 // 질문 입력 화면
-function AnswerQuestion(props) {
+function AnswerQuestion({questionList, isTyping}) {
 
   // 질문자가 문제 낼 동안에는. 로딩 화면? 문제를 내는 중입니다...
 
   return (
     <div>
-        {props.game.isTyping 
+        {isTyping 
           ? <h2>질문자가 질문을 만들고 있습니다...</h2> : 
         <>
-          <h2>Q: {props.game.question}</h2>
+          <h2>Q: {questionList[0].questionTitle}</h2>
           <button>O</button>
           <button>X</button>
         </>}

@@ -8,7 +8,6 @@ function App() {
   const [game, setGame] = useState({
     roomName : 'test',
     maxNum : 1,
-    question : "여기서 마음에 드는 사람이 있다?",
     userName : "",
     userList : [],
     currentQuestioner : "",
@@ -19,12 +18,14 @@ function App() {
 
   useEffect(() => {
     console.log("game = " + game.questionList);
+    setGame(game);
   }, [game]);
+
   return (
     <div className="App">
         <Routes>
-          <Route path="/" element={<Main game={game} setGame={setGame}/>} />
-          <Route path="/playGround" element={<PlayGround game={game} setGame={setGame}/>} />
+          <Route path="/" element={<Main roomName={game.roomName} maxNum={game.maxNum} />} />
+          <Route path="/playGround" element={<PlayGround userList={game.userList} questionList={game.questionList} currentQuestioner={game.currentQuestioner} isTyping={game.isTyping}/>} />
         </Routes>
   
     </div>
