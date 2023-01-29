@@ -5,27 +5,22 @@ import Main from "./Pages/main";
 
 function App() {
   
-  const [game, setGame] = useState({
-    roomName : 'test',
-    maxNum : 1,
-    userName : "",
-    userList : [],
-    currentQuestioner : "",
-    isTyping : false,
-    questionList: [],
-  });
-
-
-  useEffect(() => {
-    console.log("game = " + game.questionList);
-    setGame(game);
-  }, [game]);
+  // const [game, setGame] = useState({
+  //   roomName : '첫번째 방제목',
+  //   maxNum : 5,
+  //   userName : "",
+  //   userList : [],
+  //   currentQuestioner : "",
+  //   isTyping : false,
+  //   questionList: [],
+  //   question: "첫번째 질문",
+  // });
 
   return (
     <div className="App">
         <Routes>
-          <Route path="/" element={<Main roomName={game.roomName} maxNum={game.maxNum} />} />
-          <Route path="/playGround" element={<PlayGround userList={game.userList} questionList={game.questionList} currentQuestioner={game.currentQuestioner} isTyping={game.isTyping}/>} />
+          <Route path="/" element={<Main/>} />
+          <Route path="/playGround" element={<PlayGround/>} />
         </Routes>
   
     </div>

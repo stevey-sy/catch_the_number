@@ -1,14 +1,27 @@
 import {useState, useEffect} from "react";
+import { useLocation } from 'react-router-dom';
 import CreateQuestion from "../Components/createQuestion";
 import AnswerQuestion from "../Components/answerQuestion";
 import UserList from "../Components/userList";
 
-function PlayGround({userList, questionList, currentQuestioner, isTyping}) {
+function PlayGround() {
 
-    // o,x - 완료.
-    // 질문입력 - 완료.
-    // 유저리스트 - 완료.
-    // 결과 컴포넌트
+    const location = useLocation();
+
+    const roomName = location.state.roomName;
+    const maxNum = location.state.maxNum;
+    const [userList, setUserList] = useState([]);
+
+    const [game, setGame] = useState({
+      roomName : roomName,
+      maxNum : maxNum,
+      userName : "",
+      userList : [],
+      currentQuestioner : "",
+      isTyping : false,
+      questionList: [],
+      question: "",
+    });
 
     const onSubmit = (event) => {
         // props.game.question = event.target.value;
@@ -17,8 +30,8 @@ function PlayGround({userList, questionList, currentQuestioner, isTyping}) {
     // const [userList, setUserList] = useState(userList);
 
     const addItem = (newItem) => {
-      userList = [...userList, newItem];
-      // setUserList((userList)=>[...userList, newItem]);
+      // userList = [...userList, newItem];
+      setUserList((userList)=>[...userList, newItem]);
     }
 
     useEffect(() => {
@@ -31,13 +44,16 @@ function PlayGround({userList, questionList, currentQuestioner, isTyping}) {
         answer: "",
       };
       addItem(user);
-      currentQuestioner = "user1";
+      game.currentQuestioner = "user1";
     }
   }, []);
 
   return (
-    <>{currentQuestioner == "user1" 
-        ? <CreateQuestion questionList={questionList} /> : <AnswerQuestion isTyping={isTyping} questionList={questionList} />}
+    <>
+    <h2>방제목: {roomName}</h2>
+    <h3>인원: {maxNum}명</h3>
+    {game.currentQuestioner === "user1" 
+        ? <CreateQuestion questionList={game.questionList} /> : <AnswerQuestion isTyping={game.isTyping} questionList={game.questionList} />}
 
     <UserList userList={userList} />
     </>

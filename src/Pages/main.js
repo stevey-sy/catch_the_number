@@ -1,26 +1,46 @@
 import {useState, useEffect} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
-function Main({roomName, maxNum}) {
+function Main({game, setGame}) {
 
-  useEffect(() => {
-    // effect function
-  }, []);
+  const navigate = useNavigate();
+  const [roomName, setRoomName] = useState("");
+  const [maxNum, setMaxNum] = useState(0);
+
+  const onChangeRoomName = (event) => {
+    console.log(event.target.value);
+    setRoomName(event.target.value);
+  };
+
+  const onChangeMaxNum = (event) => {
+    console.log(event.target.value);
+    setMaxNum(event.target.value);
+  };
+
+  const onSubmit = () => {
+    navigate('/playGround', {
+      state : {
+        roomName : roomName,
+        maxNum: maxNum
+      }
+    });
+  };
 
   return (
     <div>
           <h2>방만들기</h2>
             <div>
-              <label for="inputRoomName">방이름 : </label>
-              <input id="inputRoomName"  value={roomName} type="text" placeholder="방 이름을 입력해 주세요..." />
+              <label>방이름 : </label>
+              <input name="" id="inputRoomName" onChange={onChangeRoomName} value={roomName} type="text" placeholder="방 이름을 입력해 주세요..." />
             </div>
             <div>
-              <label for="inputMaxNum">참여자 수 : </label>
-              <input id="inputMaxNum" value={maxNum} type="number" placeholder="0" />
+              <label>참여자 수 : </label>
+              <input id="inputMaxNum" onChange={onChangeMaxNum} value={maxNum} type="number" placeholder="0" />
             </div>
-            <Link to="/playGround">
+            {/* <Link to="/playGround" state={}>
                 <button>방만들기</button>
-            </Link> 
+            </Link>  */}
+            <button onClick={onSubmit}>방만들기</button>
     </div>
   );
 }

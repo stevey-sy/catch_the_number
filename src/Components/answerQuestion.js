@@ -10,7 +10,7 @@ function AnswerQuestion({questionList, isTyping}) {
         {isTyping 
           ? <h2>질문자가 질문을 만들고 있습니다...</h2> : 
         <>
-          <h2>Q: {questionList[0].questionTitle}</h2>
+          <h2>Q: 질문중</h2>
           <button>O</button>
           <button>X</button>
         </>}
