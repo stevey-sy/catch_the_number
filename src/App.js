@@ -4,18 +4,6 @@ import PlayGround from "./Pages/playGround";
 import Main from "./Pages/main";
 
 function App() {
-  
-  // const [game, setGame] = useState({
-  //   roomName : '첫번째 방제목',
-  //   maxNum : 5,
-  //   userName : "",
-  //   userList : [],
-  //   currentQuestioner : "",
-  //   isTyping : false,
-  //   questionList: [],
-  //   question: "첫번째 질문",
-  // });
-
   return (
     <div className="App">
         <Routes>
